@@ -17,14 +17,6 @@ java {
 
 repositories {
     mavenCentral()
-    maven {
-        name = "github"
-        url = "https://maven.pkg.github.com/malczuuu/maven-lib-gh-pages"
-        credentials {
-            username = project.findProperty("gpr.user") ?: System.getenv("GPR_USER")
-            password = project.findProperty("gpr.token") ?: System.getenv("GPR_TOKEN")
-        }
-    }
 }
 
 dependencies {
@@ -39,6 +31,16 @@ publishing {
     publications {
         maven(MavenPublication) {
             from components.java
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/malczuuu/maven-lib-gh-pages"
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GPR_USER")
+                password = project.findProperty("gpr.token") ?: System.getenv("GPR_TOKEN")
+            }
         }
     }
 }
